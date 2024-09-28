@@ -1,0 +1,14 @@
+GET http://localhost:8000/school
+
+### Create a ClassVariable
+
+POST http://localhost:8000/school
+
+### Get a Class
+GET http://localhost:8000/school/class
+
+### Patch a Class
+PATCH http://localhost:8000/school/class
+
+### Delete a Class
+DELETE http://localhost:8000/school/class

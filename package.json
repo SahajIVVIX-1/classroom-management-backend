@@ -4,7 +4,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "devStart": "nodemon src/index.js"
+    "devStart": "nodemon rest api/app.js"
   },
   "author": "",
   "license": "ISC",
