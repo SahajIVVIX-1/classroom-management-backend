@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const Assignment = require("./schema/assignment");
 const Notification = require("./schema/notification");
+const Student = require("./schema/student");
+const Attendence = require("./schema/attendence");
 
 mongoose
   .connect(
