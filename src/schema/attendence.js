@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
 
 const attendanceSchema = new mongoose.Schema({
-    classID: Number,
+    class_id: Number,
     AttendType: Boolean,
-    studentID: Number,
+    student_id: Number,
     date: Date
 })
 
