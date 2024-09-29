@@ -4,20 +4,19 @@ const Notification = require("./schema/notification");
 const Student = require("./schema/student");
 const Attendence = require("./schema/attendence");
 const Classroom = require("./schema/classroom");
-const express = require("express"); // express module
-const app = express(); // express app
+const express = require("express");
+const app = express();
 
-mongoose.connect(
-  "mongodb+srv://23bit092:KN8Zena5bRfZ8npF@cluster0.ut8qk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-).then(() => {
-  console.log("🚀 Connected");
-}).catch((err) => {
-  console.log(err);
-});
-
-app.get("/", (req, res,next) => {
-  res.send({ message: "Welcome to the Classroom Manager!" });
-});
+mongoose
+  .connect(
+    "mongodb+srv://23bit092:KN8Zena5bRfZ8npF@cluster0.ut8qk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+  )
+  .then(() => {
+    console.log("Connected");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 app.get("/class", async (req, res) => {
   const classData = await Classroom.find();
@@ -76,6 +75,47 @@ app.post("/assignment", async (req, res) => {
 
 app.listen(8000, () => {
   console.log("We are listening on Port:8000 ...");
+});
+
+app.get("/:class", async (req, res) => {
+  const aggregateData = await Classroom.aggregate([
+    {
+      $match: { name: req.params.class },
+    },
+    {
+      $lookup: {
+        from: "students",
+        localField: "_id",
+        foreignField: "class_id",
+        as: "students",
+      },
+    },
+    {
+      $lookup: {
+        from: "assignments",
+        localField: "_id",
+        foreignField: "class_id",
+        as: "assignments",
+      },
+    },
+    {
+      $lookup: {
+        from: "attendances",
+        localField: "_id",
+        foreignField: "class_id",
+        as: "attendences",
+      },
+    },
+    {
+      $lookup: {
+        from: "notifications",
+        localField: "_id",
+        foreignField: "class_id",
+        as: "notifications",
+      },
+    },
+  ]);
+  res.json(aggregateData);
 });
 
 app.use((req, res, next) => {
