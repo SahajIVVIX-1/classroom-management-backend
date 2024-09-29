@@ -4,4 +4,4 @@ const classroomSchema = new mongoose.Schema({
   className: String,
 });
 
-module.exports = mongoose.model("Classroom", classroomSchema);
+module.exports = mongoose.model("Clasroom", classroomSchema);
