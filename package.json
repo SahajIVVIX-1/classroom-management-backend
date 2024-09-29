@@ -4,12 +4,14 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "devStart": "nodemon src/index.js"
+    "devStart": "nodemon rsst api/app.js"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "express": "^4.21.0",
+    "mongodb": "^6.9.0",
     "mongoose": "^8.7.0"
   },
   "devDependencies": {

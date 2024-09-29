@@ -1,8 +1,7 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
-const classroomSchema = new mangoose.Schema({
-  className: String
-})
+const classroomSchema = new mongoose.Schema({
+  className: String,
+});
 
-module.exports = mongoose.model('Classroom',classroomSchema)
-
+module.exports = mongoose.model("Clasroom", classroomSchema);
