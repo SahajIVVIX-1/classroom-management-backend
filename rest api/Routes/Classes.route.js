@@ -21,6 +21,8 @@ router.delete("/:class", (req, res, next) => {
   res.send("Deleting Id ...");
 });
 
-// router.get((req, res, next) => {});
+router.get("/some", (req, res, next) => {
+  next(new Error("Internal Server Error"));
+});
 
 module.exports = router;
