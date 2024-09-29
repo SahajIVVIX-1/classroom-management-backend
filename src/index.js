@@ -76,3 +76,11 @@ app.post("/assignment", async (req, res) => {
 app.listen(8000, () => {
   console.log("We are listening on Port:8000 ...");
 });
+
+// const attendence = new Attendence({
+//   class_id: new mongoose.Types.ObjectId("66f7e77210d87d7f27a78c60"),
+//   AttendType: false,
+//   student_id: new mongoose.Types.ObjectId("66f8f98c4a0838057ad89d41"),
+//   date: new Date(),
+// });
+// attendence.save().then(() => console.log("Attendence saved"));
