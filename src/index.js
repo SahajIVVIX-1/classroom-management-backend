@@ -7,16 +7,17 @@ const Classroom = require("./schema/classroom");
 const express = require("express"); // express module
 const app = express(); // express app
 
-mongoose
-  .connect(
-    "mongodb+srv://23bit092:KN8Zena5bRfZ8npF@cluster0.ut8qk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-  )
-  .then(() => {
-    console.log("🚀 Connected");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+mongoose.connect(
+  "mongodb+srv://23bit092:KN8Zena5bRfZ8npF@cluster0.ut8qk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+).then(() => {
+  console.log("🚀 Connected");
+}).catch((err) => {
+  console.log(err);
+});
+
+app.get("/", (req, res,next) => {
+  res.send({ message: "Welcome to the Classroom Manager!" });
+});
 
 app.get("/class", async (req, res) => {
   const classData = await Classroom.find();
@@ -75,4 +76,22 @@ app.post("/assignment", async (req, res) => {
 
 app.listen(8000, () => {
   console.log("We are listening on Port:8000 ...");
+});
+
+app.use((req, res, next) => {
+  const err = new Error("Not Found");
+  err.status = 404;
+  next(err);
+});
+
+// Error handler
+app.use((err, req, res, next) => {
+  res.status(err.status || 500);
+  res.send({
+    error: {
+      status: err.status || 500,
+      error: "Not Found",
+      message: err.message,
+    },
+  });
 });
