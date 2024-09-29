@@ -5,8 +5,13 @@ const Student = require("./schema/student");
 const Attendence = require("./schema/attendence");
 const Classroom = require("./schema/classroom");
 const express = require("express");
+const cors = require("cors");
 const app = express();
 
+app.use(express.json());
+
+app.use(cors());
+app.options("*", cors());
 mongoose
   .connect(
     "mongodb+srv://23bit092:KN8Zena5bRfZ8npF@cluster0.ut8qk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
