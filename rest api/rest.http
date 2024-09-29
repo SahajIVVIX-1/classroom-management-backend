@@ -1,0 +1,21 @@
+GET http://localhost:8000/classroom
+
+### create a product
+
+POST http://localhost:8000/classroom
+
+### GET a Product by id
+
+GET http://localhost:8000/classroom/{id}
+
+### update a product by id
+
+PATCH  http://localhost:8000/classroom/{id}
+
+### delete a product by id
+
+DELETE http://localhost:8000/classroom/{id}
+
+###
+
+GET http://localhost:8000/xyz

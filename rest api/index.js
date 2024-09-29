@@ -1,30 +1,38 @@
-// const express = require('express')
+const express = require('express')
+const mongoose = require('mongoose')
+const Classroom = require('./src/schema/classroom')
 
-// const app = express()
-// const PORT = 8000
+const app = express()
+mongoose.connect("mongodb+srv://23bit092:KN8Zena5bRfZ8npF@cluster0.ut8qk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    ).then(() => {
+        console.log("🚀 Connected")
+    }).catch((err) => {
+        console.log(err)
+    })
+                
+    const PORT = 8000
 
-// //Routs
-// app.listen(PORT,()=>console.log(`Server Started at PORT: ${PORT}`))
+const ClassRoomRouter = require('./routes/classroom.route')
+app.use('/classroom',ClassRoomRouter)
 
-const http = require('http')
-const PORT = 8000
-
-const server = http.createServer((req, res) => {
-    if(req.url === '/') {
-        res.write("Jay Swaminarayan\n");
-        res.write("\nYou are on the home page\n");
-        res.end(); 
-    } 
-    else if(req.url === '/another'){
-        res.write("Jay Swaminarayan\n");
-        res.write("\nYou are in another rougt\n");
-        res.end();
-    }
-    else{
-        res.write("Jay Swaminarayan\n");
-        res.write("\ni am very happy that this run on web site\n");
-        res.end();
-    }
+app.use((req,res,next) => {
+    const err = new Error("Jay Swaminarayan page is Not Founde")
+    err.status = 404
+    next(err)
 })
 
-server.listen(PORT, () => console.log(`seerver started at PORT: ${PORT}`))
+//error handler
+app.use((err,req,res,next) => {
+    res.status(err.status || 500)
+    res.send({
+        error:{
+            status: err.status || 500,
+            message:err.message
+        }
+    })
+})
+
+app.listen(PORT, () => {
+    console.log("Jay Swaminarayan")
+    console.log(`This server is running at PORT: ${PORT}`)
+})
